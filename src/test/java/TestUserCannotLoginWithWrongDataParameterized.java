@@ -1,10 +1,6 @@
-import Model.UserModel;
-import io.qameta.allure.Description;
-import io.qameta.allure.junit4.DisplayName;
-import io.restassured.response.Validatable;
+import model.UserModel;
 import io.restassured.response.ValidatableResponse;
 import org.hamcrest.CoreMatchers;
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,9 +8,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import static data.Constants.*;
-import static data.Constants.PASSWORD;
 import static org.apache.http.HttpStatus.*;
-import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(Parameterized.class)
@@ -38,9 +32,7 @@ public class TestUserCannotLoginWithWrongDataParameterized extends BaseTest{
                 .body("success", equalTo(true));
 
         userToken = response.extract().path("accessToken");
-
     }
-
 
     @Parameterized.Parameters(name = "{0}")
     public static Object[][] testData() {
@@ -51,7 +43,6 @@ public class TestUserCannotLoginWithWrongDataParameterized extends BaseTest{
     }
 
     @Test
-
     public void testLoginWithoutRequiredDataReturns400() {
 
         UserModel user = new UserModel(email, password);

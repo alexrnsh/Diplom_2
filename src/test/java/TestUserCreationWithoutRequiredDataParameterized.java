@@ -1,4 +1,4 @@
-import Model.UserModel;
+import model.UserModel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -9,6 +9,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 
 @RunWith(Parameterized.class)
 public class TestUserCreationWithoutRequiredDataParameterized extends BaseTest {
+
     private final String email;
     private final String password;
     private final String name;
@@ -27,7 +28,8 @@ public class TestUserCreationWithoutRequiredDataParameterized extends BaseTest {
                 {EMAIL, PASSWORD, null}
         };
     }
-@Test
+
+    @Test
     public void testCannotCreateUserWithoutRequiredData() {
         UserModel user = new UserModel(email, password, name);
         userApi.createUser(user)

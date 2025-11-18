@@ -1,4 +1,4 @@
-import Model.UserModel;
+import model.UserModel;
 
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
@@ -30,6 +30,7 @@ public class TestUserCreation extends BaseTest {
         ValidatableResponse response = userApi.createUser(user)
                 .statusCode(SC_OK)
                 .body("success", equalTo(true));
+
         userToken = response.extract().path("accessToken");
 
         userApi.createUser(duplicateUser)
@@ -53,7 +54,6 @@ public class TestUserCreation extends BaseTest {
 
     @After
     public void testUserDeletion(){
-
         if (userToken != null) {
             userApi.deleteUser(userToken)
                     .statusCode(SC_ACCEPTED)  // Ожидаемый статус 200

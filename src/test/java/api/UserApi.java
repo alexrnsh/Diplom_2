@@ -1,15 +1,14 @@
 package api;
 
-import Model.UserModel;
-import io.qameta.allure.Step;
+import model.UserModel;
 import io.restassured.response.ValidatableResponse;
 
 import static io.restassured.RestAssured.given;
 
 public class UserApi {
+
     private final static String USER_CREATION_API = "/api/auth/register";
     private final static String USER_LOGIN_API = "/api/auth/login";
-
 
     public ValidatableResponse createUser (UserModel userModel){
         return given()
@@ -22,7 +21,7 @@ public class UserApi {
 
     }
 
-   public ValidatableResponse loginUser (UserModel userModel, String userToken) {
+    public ValidatableResponse loginUser (UserModel userModel, String userToken) {
         return given()
                 .log().all()
                 .header("Content-type", "application/json")
@@ -32,6 +31,7 @@ public class UserApi {
                 .then()
                 .log().all();
     }
+
     public ValidatableResponse deleteUser(String userToken){
         return given()
                 .log().all()

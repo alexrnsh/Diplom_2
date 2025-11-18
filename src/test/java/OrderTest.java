@@ -1,6 +1,4 @@
-import Model.UserModel;
-import api.OrderApi;
-import api.UserApi;
+import model.UserModel;
 import io.restassured.response.ValidatableResponse;
 import org.hamcrest.Matchers;
 import org.junit.AfterClass;
@@ -16,8 +14,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
 public class OrderTest extends BaseTest {
-    private final OrderApi orderApi = new OrderApi();
-    private static final UserApi userApi = new UserApi();
+
     private static String userToken;
 
     @BeforeClass
@@ -52,33 +49,29 @@ public class OrderTest extends BaseTest {
                 .body("order.owner", notNullValue());
     }
 
+    @Test
+    public void testCreateOrderWithEmptyIngredients() {
+        orderApi.createOrderWithEmptyIngredients(userToken)
+                .statusCode(SC_BAD_REQUEST)
+                .body("success", equalTo(false))
+                .body("message", equalTo("Ingredient ids must be provided"));
+    }
 
-        @Test
-        public void testCreateOrderWithEmptyIngredients() {
+    @Test
+    public void testCreateOrderWithWrongIngredients() {
 
-            orderApi.createOrderWithEmptyIngredients(userToken)
-                    .statusCode(SC_BAD_REQUEST)
-                    .body("success", equalTo(false))
-                    .body("message", equalTo("Ingredient ids must be provided"));
-        }
+        List<String> ingredients = Arrays.asList("invalidIngredient1", "invalidIngredient2");
 
-
-        @Test
-        public void testCreateOrderWithWrongIngredients() {
-
-            List<String> ingredients = Arrays.asList("invalidIngredient1", "invalidIngredient2");
-
-            orderApi.createOrderWithWrongIngredients(userToken, ingredients)
-                    .statusCode(SC_INTERNAL_SERVER_ERROR);
-        }
+        orderApi.createOrderWithWrongIngredients(userToken, ingredients)
+                .statusCode(SC_INTERNAL_SERVER_ERROR);
+    }
 
     @AfterClass
     public static void testUserDeletion(){
-
         if (userToken != null) {
             userApi.deleteUser(userToken)
-                    .statusCode(SC_ACCEPTED)  // Ожидаемый статус 200
-                    .body("success", Matchers.equalTo(true))  // Ожидаем, что success будет true
+                    .statusCode(SC_ACCEPTED)
+                    .body("success", Matchers.equalTo(true))
                     .body("message", Matchers.equalTo("User successfully removed"));
         }
     }

@@ -7,6 +7,7 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 
 public class OrderApi {
+
     private static final String ORDER_CREATION_API = "/api/orders";
 
     public ValidatableResponse createOrderWithoutAuth (List<String> ingredients) {
@@ -54,8 +55,6 @@ public class OrderApi {
                 .then()
                 .log().all();
     }
-
-
 
     private String toJsonArray(List<String> ingredients) {
         StringBuilder jsonArray = new StringBuilder("[");
