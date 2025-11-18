@@ -3,6 +3,7 @@ package api;
 import io.restassured.response.ValidatableResponse;
 
 import java.util.List;
+import io.qameta.allure.Step;
 
 import static io.restassured.RestAssured.given;
 
@@ -10,6 +11,7 @@ public class OrderApi {
 
     private static final String ORDER_CREATION_API = "/api/orders";
 
+    @Step("Создание заказа без авторизации" + ORDER_CREATION_API)
     public ValidatableResponse createOrderWithoutAuth (List<String> ingredients) {
         return given()
                 .log().all()
@@ -19,7 +21,7 @@ public class OrderApi {
                 .then()
                 .log().all();
     }
-
+    @Step ("Создание заказа с авторизацией" + ORDER_CREATION_API)
     public ValidatableResponse createOrderWithAuth(String userToken, List<String> ingredients) {
         return given()
                 .log().all()
@@ -31,7 +33,7 @@ public class OrderApi {
                 .then()
                 .log().all();
     }
-
+    @Step ("Создание заказа без ингредиентов" + ORDER_CREATION_API)
     public ValidatableResponse createOrderWithEmptyIngredients(String userToken) {
         return given()
                 .log().all()
@@ -43,7 +45,7 @@ public class OrderApi {
                 .then()
                 .log().all();
     }
-
+    @Step ("Создание заказа неправильным хэшем ингредиентов" + ORDER_CREATION_API)
     public ValidatableResponse createOrderWithWrongIngredients(String userToken, List<String> ingredients) {
         return given()
                 .log().all()

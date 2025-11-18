@@ -1,3 +1,5 @@
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import model.UserModel;
 import io.restassured.response.ValidatableResponse;
 import org.hamcrest.CoreMatchers;
@@ -43,6 +45,8 @@ public class TestUserCannotLoginWithWrongDataParameterized extends BaseTest{
     }
 
     @Test
+    @DisplayName("Невозможно сделать логин без емэйл или пароля")
+    @Description("Параметризованный тест на получение ошибки при попытке создания курьера без емэйл или пароля")
     public void testLoginWithoutRequiredDataReturns400() {
 
         UserModel user = new UserModel(email, password);

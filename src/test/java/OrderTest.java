@@ -1,3 +1,5 @@
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import model.UserModel;
 import io.restassured.response.ValidatableResponse;
 import org.hamcrest.Matchers;
@@ -29,6 +31,8 @@ public class OrderTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Создание заказа без авторизации")
+    @Description("Отправляет запрос на создание заказа и проверяет что возвращается статус 200")
     public void testCreateOrderWithoutAuth() {
 
         List<String> ingredients = Arrays.asList("61c0c5a71d1f82001bdaaa71", "61c0c5a71d1f82001bdaaa72");
@@ -39,6 +43,8 @@ public class OrderTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Создание заказа с авторизацией")
+    @Description("Отправляет запрос на создание заказа и проверяет что возвращается статус 200")
     public void testCreateOrderWithAuth() {
 
         List<String> ingredients = Arrays.asList("61c0c5a71d1f82001bdaaa71", "61c0c5a71d1f82001bdaaa72");
@@ -50,6 +56,8 @@ public class OrderTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Создание заказа без ингредиентов")
+    @Description("Отправляет запрос на создание заказа и проверяет что возвращается статус 400")
     public void testCreateOrderWithEmptyIngredients() {
         orderApi.createOrderWithEmptyIngredients(userToken)
                 .statusCode(SC_BAD_REQUEST)
@@ -58,6 +66,8 @@ public class OrderTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Создание заказа с неверным хэшем ингредиентов")
+    @Description("Отправляет запрос на создание заказа и проверяет что возвращается статус 500")
     public void testCreateOrderWithWrongIngredients() {
 
         List<String> ingredients = Arrays.asList("invalidIngredient1", "invalidIngredient2");

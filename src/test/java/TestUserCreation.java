@@ -1,3 +1,5 @@
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import model.UserModel;
 
 import io.restassured.response.ValidatableResponse;
@@ -14,6 +16,8 @@ public class TestUserCreation extends BaseTest {
     private String userToken;
 
     @Test
+    @DisplayName("Создание пользователя")
+    @Description("Отправляет запрос на создание пользователя и проверяет что возвращается статус 200")
     public void testUserCanBeCreated(){
 
         ValidatableResponse response = userApi.createUser(user)
@@ -24,6 +28,8 @@ public class TestUserCreation extends BaseTest {
     }
 
     @Test
+    @DisplayName("Нельзя создать двух одинаковых пользователей")
+    @Description("Отправляет 2 запроса на создание одинаковых пользователей и проверяет что возвращается ошибка 403")
     public void testCannotCreateDuplicateUser(){
         UserModel duplicateUser = new UserModel(EMAIL, PASSWORD, NAME);
 
@@ -40,6 +46,8 @@ public class TestUserCreation extends BaseTest {
     }
 
     @Test
+    @DisplayName("Логин пользователя")
+    @Description("Отправляет запрос на логин пользователя и проверяет что возвращается статус 200")
     public void testUserCanLogin(){
         ValidatableResponse response = userApi.createUser(user)
                 .statusCode(SC_OK)

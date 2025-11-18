@@ -1,3 +1,5 @@
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import model.UserModel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +32,8 @@ public class TestUserCreationWithoutRequiredDataParameterized extends BaseTest {
     }
 
     @Test
+    @DisplayName("Невозможно создать пользователя без емэйл или пароля или имени")
+    @Description("Параметризованный тест на получение ошибки при попытке создания курьера без необходимых параметров")
     public void testCannotCreateUserWithoutRequiredData() {
         UserModel user = new UserModel(email, password, name);
         userApi.createUser(user)
