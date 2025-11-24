@@ -1,4 +1,4 @@
-package data;
+package constants;
 
 import com.github.javafaker.Faker;
 

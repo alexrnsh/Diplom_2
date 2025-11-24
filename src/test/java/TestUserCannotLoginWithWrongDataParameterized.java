@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import static data.Constants.*;
+import static constants.Constants.*;
 import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.equalTo;
 

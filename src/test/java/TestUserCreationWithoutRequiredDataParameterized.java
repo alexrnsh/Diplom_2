@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import static data.Constants.*;
+import static constants.Constants.*;
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 import static org.hamcrest.CoreMatchers.equalTo;
 

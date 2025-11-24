@@ -10,7 +10,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static data.Constants.*;
+import static constants.Constants.*;
 import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -59,7 +59,7 @@ public class OrderTest extends BaseTest {
     @DisplayName("Создание заказа без ингредиентов")
     @Description("Отправляет запрос на создание заказа и проверяет что возвращается статус 400")
     public void testCreateOrderWithEmptyIngredients() {
-        orderApi.createOrderWithEmptyIngredients(userToken)
+        orderApi.createOrderWithAuth(userToken, List.of())
                 .statusCode(SC_BAD_REQUEST)
                 .body("success", equalTo(false))
                 .body("message", equalTo("Ingredient ids must be provided"));
@@ -72,7 +72,7 @@ public class OrderTest extends BaseTest {
 
         List<String> ingredients = Arrays.asList("invalidIngredient1", "invalidIngredient2");
 
-        orderApi.createOrderWithWrongIngredients(userToken, ingredients)
+        orderApi.createOrderWithAuth(userToken, ingredients)
                 .statusCode(SC_INTERNAL_SERVER_ERROR);
     }
 

@@ -6,7 +6,7 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Test;
 
-import static data.Constants.*;
+import static constants.Constants.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.apache.http.HttpStatus.*;
 

@@ -23,6 +23,7 @@ public class UserApi {
                 .log().all();
 
     }
+
     @Step("Логин пользователя через POST " + USER_LOGIN_API)
     public ValidatableResponse loginUser (UserModel userModel, String userToken) {
         return given()
@@ -34,6 +35,7 @@ public class UserApi {
                 .then()
                 .log().all();
     }
+
     @Step("Удаление пользователя через DELETE " + USER_DELETION_API)
     public ValidatableResponse deleteUser(String userToken){
         return given()

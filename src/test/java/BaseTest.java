@@ -3,7 +3,7 @@ import api.UserApi;
 import io.restassured.RestAssured;
 import org.junit.BeforeClass;
 
-import static data.Constants.BASE_URL;
+import static constants.Constants.BASE_URL;
 
 public class BaseTest {
 
